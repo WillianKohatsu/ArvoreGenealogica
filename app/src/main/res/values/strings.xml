@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Arvore Genealogica</string>
+    <string name="bt_login">Entrar</string>
+    <string name="txt_cadastro">Crie uma conta clicando aqui</string>
+</resources>
