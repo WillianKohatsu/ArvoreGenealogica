@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "680356894828",
+    "project_id": "arvore-genealogica",
+    "storage_bucket": "arvore-genealogica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680356894828:android:82d6874c1cdde9bac52049",
+        "android_client_info": {
+          "package_name": "com.example.arvoregenealogica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680356894828-aaufhs9ivnil09hh91pmk3phktgj9m32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC47uGhu-teETq9W3knMxSgqHPf4KfQQG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680356894828-aaufhs9ivnil09hh91pmk3phktgj9m32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
