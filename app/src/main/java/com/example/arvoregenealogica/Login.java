@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        telaPerfil();
+                        telaArvore();
                     }
                 },3000);
             }else{
@@ -83,12 +83,12 @@ public class Login extends AppCompatActivity {
 
         FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
         if(usuarioAtual != null){
-            telaPerfil();
+            telaArvore();
         }
     }
 
-    private void telaPerfil(){
-        Intent intent = new Intent(Login.this, TelaPerfil.class);
+    private void telaArvore(){
+        Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
