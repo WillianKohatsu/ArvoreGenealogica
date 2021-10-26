@@ -3,6 +3,7 @@ package com.example.arvoregenealogica;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +63,9 @@ public class FormCadastro extends AppCompatActivity {
                 salvarDadosUsuario();
                 Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
                 snackbar.show();
+                Intent intent = new Intent(FormCadastro.this, Login.class);
+                startActivity(intent);
+                finish();
             }else{
                 String erro;
                 try {

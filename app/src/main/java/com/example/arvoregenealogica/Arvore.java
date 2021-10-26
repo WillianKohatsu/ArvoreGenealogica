@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arvoregenealogica.ui.FamilyTreeActivity;
+import com.example.arvoregenealogica.ui.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,7 +23,7 @@ import java.util.Objects;
 public class Arvore extends AppCompatActivity {
 
     private TextView nomeUsuario, emailUsuario;
-    private Button btnDeslogar;
+    private Button btnEditar, btnAdd, btnDeslogar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String usuarioId;
 
@@ -42,6 +44,23 @@ public class Arvore extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Arvore.this, Parente.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Arvore.this, FamilyTreeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -55,17 +74,17 @@ public class Arvore extends AppCompatActivity {
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                if(documentSnapshot != null){
-                    nomeUsuario.setText(documentSnapshot.getString("nome"));
-                    emailUsuario.setText(email);
-                }
+                nomeUsuario.setText(documentSnapshot.getString("nome"));
+                emailUsuario.setText(email);
             }
         });
     }
 
     private void iniciarComponentes(){
-        nomeUsuario = findViewById(R.id.txtNomeUsusario);
-        emailUsuario = findViewById(R.id.txtEmailUsusario);
+        nomeUsuario = findViewById(R.id.txtNomeUsuario);
+        emailUsuario = findViewById(R.id.txtEmailUsuario);
         btnDeslogar = findViewById(R.id.btnDeslogar);
+        btnEditar = findViewById(R.id.btnEditar);
+        btnAdd = findViewById(R.id.btnAdicionar);
     }
 }

@@ -1,17 +1,5 @@
 <resources>
     <string name="app_name">Arvore Genealogica</string>
-    <string name="bt_login">Entrar</string>
-    <string name="nome">Nome</string>
-    <string name="email">Email</string>
-    <string name="senha">Senha</string>
-    <string name="txt_cadastro">Crie uma conta clicando aqui</string>
-    <string name="title_cadastro">Cadastre-se</string>
-    <string name="bt_cadastrar">Cadastrar</string>
-    <string name="bt_deslogar">Deslogar</string>
-
-    <string name="ex_nome">Willian Massanobu Kohatsu</string>
-    <string name="ex_email">willian.kohatsu@gmail.com</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -23,4 +11,21 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="local">Local de nascimento</string>
+    <string name="ani">Data de nascimento</string>
+    <string name="txt_cadastro">Crie uma conta clicando aqui</string>
+    <string name="title_cadastro">Cadastre-se</string>
+    <string name="bt_cadastrar">Cadastrar</string>
+    <string name="bt_deslogar">Deslogar</string>
+    <string name="bt_login">Entrar</string>
+    <string name="bt_add">Adicionar parente</string>
+    <string name="bt_edit">Editar perfil</string>
+
+    <string name="ex_nome">Willian Massanobu Kohatsu</string>
+    <string name="ex_email">willian.kohatsu@gmail.com</string>
+    <string name="imagem">Imagem</string>
 </resources>

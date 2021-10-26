@@ -3,19 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/background.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/calendar.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/container_components.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/ic_email.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/ic_menu_camera.xml" value="0.23385416666666667" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_arvore.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_editperfil.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_family_tree.xml" value="0.10208333333333333" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_form_cadastro.xml" value="0.25" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_main.xml" value="0.1598731884057971" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_new_family_tree.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_parente.xml" value="0.33" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/activity_tela_perfil.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/app_bar_main.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/content_main.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/dsafadsf.xml" value="0.10572916666666667" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/fragment_gallery.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/fragment_home.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/fragment_slideshow.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/item_family.xml" value="0.19519927536231885" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/item_new_family.xml" value="0.19519927536231885" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/layout/nav_header_main.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/menu/activity_main_drawer.xml" value="0.21770833333333334" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/menu/main.xml" value="0.21770833333333334" />
+        <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23385416666666667" />
       </map>
     </option>
   </component>

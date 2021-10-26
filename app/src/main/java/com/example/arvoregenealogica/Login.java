@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void telaArvore(){
-        Intent intent = new Intent(Login.this, MainActivity.class);
+        Intent intent = new Intent(Login.this, Arvore.class);
         startActivity(intent);
         finish();
     }
@@ -100,5 +100,4 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.progressBar);
     }
-
 }
