@@ -45,7 +45,7 @@ public class FamilyTreeActivity extends BaseActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
         };
         refuseTips = new String[]{
-                String.format("在设置-应用-%1$s-权限中开启存储权限，以正常使用该功能", appName),
+                String.format("Abra a permissão de armazenamento em Configurações-Aplicativo", appName),
         };
         setPermissions();
     }

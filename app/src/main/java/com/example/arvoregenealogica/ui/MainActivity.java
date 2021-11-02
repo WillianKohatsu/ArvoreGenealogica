@@ -9,10 +9,6 @@ import com.example.arvoregenealogica.R;
 
 public class MainActivity extends BaseActivity {
 
-    private TextView tvNot;
-    private TextView tvHave;
-    private TextView tvNew;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

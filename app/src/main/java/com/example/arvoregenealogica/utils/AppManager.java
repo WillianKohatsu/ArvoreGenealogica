@@ -14,24 +14,6 @@ import java.util.List;
 
 public class AppManager {
 
-    //lista de informações
-    public static List<PackageInfo> getInstallApkList(Context context) {
-        PackageManager pm = context.getPackageManager();
-        List<PackageInfo> packages = pm.getInstalledPackages(PackageManager.PERMISSION_GRANTED);
-
-        if (packages != null && packages.size() > 0) {
-            return packages;
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    public static void startUninstall(Context context, final String pkg) {
-        Uri packageURI = Uri.parse("package:" + pkg);
-        Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
-        context.startActivity(uninstallIntent);
-    }
-
     private static final String SCHEME = "package";
 
     private static final String APP_PKG_NAME_21 = "com.android.settings.ApplicationPkgName";
@@ -45,7 +27,7 @@ public class AppManager {
     public static void showInstalledAppDetails(Context context, String packageName, int... requestCode) {
         Intent intent = new Intent();
         final int apiLevel = Build.VERSION.SDK_INT;
-        if (apiLevel >= Build.VERSION_CODES.GINGERBREAD) {
+        if (apiLevel >= Build.VERSION_CODES.GINGERBREAD) { 
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts(SCHEME, packageName, null);
             intent.setData(uri);
