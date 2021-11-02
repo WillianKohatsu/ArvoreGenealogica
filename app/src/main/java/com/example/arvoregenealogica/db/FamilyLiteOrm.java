@@ -17,7 +17,7 @@ public class FamilyLiteOrm {
 
     private final String DB_NAME = "FamilyTree.db";
 
-    private final boolean DEBUGGABLE = true; // 是否输出log
+    private final boolean DEBUGGABLE = true;
 
     private LiteOrm liteOrm;
 

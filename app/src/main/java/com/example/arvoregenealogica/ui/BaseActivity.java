@@ -29,17 +29,17 @@ import java.util.List;
 
 public class BaseActivity extends Activity implements ActivityListener {
 
-    private static final int REQUEST_TO_SETTING = 0;//跳转到系统设置权限页面
+    private static final int REQUEST_TO_SETTING = 0;
 
-    protected String[] permissions = {};//需要请求的权限
-    protected String[] refuseTips = {};//拒绝请求后的对话框提示
+    protected String[] permissions = {};
+    protected String[] refuseTips = {};
 
     private InputMethodManager manager;
 
     private boolean curIsShow = false;
 
-    private DefaultAlertDialog permissionDialog;//获取权限对话框
-    private int permissionPosition = 0;//当前请求的权限
+    private DefaultAlertDialog permissionDialog;
+    private int permissionPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +75,7 @@ public class BaseActivity extends Activity implements ActivityListener {
         window.getDecorView().setFitsSystemWindows(true);
     }
 
-    //隐藏虚拟按键，并且全屏
     protected void hideBottomUIMenu() {
-        //隐藏虚拟按键，并且全屏
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB && Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             View v = this.getWindow().getDecorView();
             v.setSystemUiVisibility(View.GONE);
@@ -90,12 +88,10 @@ public class BaseActivity extends Activity implements ActivityListener {
         }
     }
 
-    //键盘显示隐藏回调
     protected void setOnKeyboardChangeListener() {
         getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(mLayoutChangeListener);
     }
 
-    //layout改变监听
     private ViewTreeObserver.OnGlobalLayoutListener mLayoutChangeListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {

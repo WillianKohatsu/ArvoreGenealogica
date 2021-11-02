@@ -4,7 +4,6 @@ import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.arvoregenealogica.interfaces.OnFamilySelectListener;
@@ -25,7 +24,6 @@ public class FamilyTreeActivity extends BaseActivity {
 
     private static final String MY_ID = "601";
 
-    private TextView tvChangeType;
     private Button btnEnlarge;
     private Button btnShrinkDown;
     private FamilyTreeView ftvTree;//没有养父母
@@ -66,7 +64,6 @@ public class FamilyTreeActivity extends BaseActivity {
     }
 
     private void initView() {
-        tvChangeType = (TextView) findViewById(R.id.tv_change_type);
         btnEnlarge = (Button) findViewById(R.id.btn_enlarge);
         btnShrinkDown = (Button) findViewById(R.id.btn_shrink_down);
         ftvTree = (FamilyTreeView) findViewById(R.id.ftv_tree);
@@ -76,13 +73,11 @@ public class FamilyTreeActivity extends BaseActivity {
     private void setData() {
         haveFosterParent = getIntent().getBooleanExtra(HAVE_FOSTER_PARENT, false);
         if (haveFosterParent) {
-            tvChangeType.setText("Ter pais adotivos");
             ftvTree.setVisibility(View.GONE);
             ftvTree2.setVisibility(View.VISIBLE);
             btnEnlarge.setVisibility(View.GONE);
             btnShrinkDown.setVisibility(View.GONE);
         } else {
-            tvChangeType.setText("Sem pais adotivos");
             ftvTree.setVisibility(View.VISIBLE);
             ftvTree2.setVisibility(View.GONE);
         }
