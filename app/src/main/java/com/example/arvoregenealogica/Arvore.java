@@ -50,7 +50,7 @@ public class Arvore extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Arvore.this, Parente.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
 
@@ -59,7 +59,7 @@ public class Arvore extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Arvore.this, FamilyTreeActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
     }

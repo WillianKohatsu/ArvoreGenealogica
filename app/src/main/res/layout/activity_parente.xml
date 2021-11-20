@@ -48,25 +48,39 @@
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <EditText
-        android:id="@+id/editSobrenome"
+        android:id="@+id/editParentesco"
         style="@style/Edit_Text"
-        android:hint="@string/sobrenome"
-        android:autofillHints="@string/sobrenome"
+        android:hint="@string/parentesco"
+        android:autofillHints="@string/parentesco"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
         app:layout_constraintTop_toBottomOf="@id/editNome"/>
 
-    <EditText
-        android:id="@+id/editLocal"
-        style="@style/Edit_Text"
-        android:hint="@string/local"
-        android:autofillHints="@string/local"
-        android:drawableEnd="@drawable/ic_place"
-        android:inputType="textEmailAddress"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editGenero"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        android:layout_width="335dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:hint="@string/genero"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="2dp"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/editSobrenome"/>
+        app:layout_constraintTop_toBottomOf="@id/editParentesco">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto"
+            android:layout_width="335dp"
+            android:layout_height="55dp"
+            android:inputType="none"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/editData"
@@ -77,7 +91,7 @@
         android:inputType="date"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/editLocal"
+        app:layout_constraintTop_toBottomOf="@id/editGenero"
         />
 
     <androidx.appcompat.widget.AppCompatButton

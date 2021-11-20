@@ -3,14 +3,11 @@ package com.example.arvoregenealogica.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class AppManager {
 
@@ -27,7 +24,7 @@ public class AppManager {
     public static void showInstalledAppDetails(Context context, String packageName, int... requestCode) {
         Intent intent = new Intent();
         final int apiLevel = Build.VERSION.SDK_INT;
-        if (apiLevel >= Build.VERSION_CODES.GINGERBREAD) { 
+        if (apiLevel >= Build.VERSION_CODES.GINGERBREAD) {
             intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts(SCHEME, packageName, null);
             intent.setData(uri);

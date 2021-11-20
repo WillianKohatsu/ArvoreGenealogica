@@ -12,10 +12,10 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="nome">Nome</string>
-    <string name="sobrenome">Sobrenome</string>
+    <string name="parentesco">Parentesco</string>
     <string name="email">Email</string>
     <string name="senha">Senha</string>
-    <string name="local">Local de nascimento</string>
+    <string name="genero">Gênero</string>
     <string name="ani">Data de nascimento</string>
     <string name="txt_cadastro">Crie uma conta clicando aqui</string>
     <string name="title_cadastro">Cadastre-se</string>
@@ -28,4 +28,5 @@
     <string name="ex_nome">Willian Massanobu Kohatsu</string>
     <string name="ex_email">willian.kohatsu@gmail.com</string>
     <string name="imagem">Imagem</string>
+
 </resources>

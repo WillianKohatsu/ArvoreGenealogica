@@ -20,18 +20,18 @@ import java.util.List;
 
 public class FamilyTreeActivity extends BaseActivity {
 
-    public static final String HAVE_FOSTER_PARENT = "have_foster_parent";//是否有养父母
+    public static final String HAVE_FOSTER_PARENT = "have_foster_parent";
 
     private static final String MY_ID = "601";
 
     private Button btnEnlarge;
     private Button btnShrinkDown;
-    private FamilyTreeView ftvTree;//没有养父母
-    private FamilyTreeView2 ftvTree2;//有养父母
+    private FamilyTreeView ftvTree;
+    private FamilyTreeView2 ftvTree2;
 
     private FamilyLiteOrm mDatabase;
 
-    private boolean haveFosterParent = false;//是否有养父母
+    private boolean haveFosterParent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
