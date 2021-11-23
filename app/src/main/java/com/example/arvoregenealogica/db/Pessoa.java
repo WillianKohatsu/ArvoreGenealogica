@@ -1,6 +1,7 @@
 package com.example.arvoregenealogica.db;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Pessoa {
@@ -20,6 +21,9 @@ public class Pessoa {
     private String imagem;
     private String genero;
     private String dtNasc;
+    private Parentesco mae;
+    private Parentesco pai;
+    private Parentesco conjuge;
 
 
     // Create table SQL query
@@ -42,6 +46,27 @@ public class Pessoa {
         this.imagem = imagem;
         this.genero = genero;
         this.dtNasc = dtNasc;
+    }
+
+    public Pessoa(String nome, String titulo, String imagem, String genero, String dtNasc) {
+        this.nome = nome;
+        this.imagem = imagem;
+        this.genero = genero;
+        this.dtNasc = dtNasc;
+    }
+
+    public void popularParentescos(ArrayList<Parentesco> parentescos){
+        for (Parentesco parentesco:
+                parentescos) {
+            switch (parentesco.getIdTipoParentesco()){
+                case TipoParentesco.mae:
+                    setMae(parentesco);
+                case TipoParentesco.pai:
+                    setPai(parentesco);
+                case TipoParentesco.conjuge:
+                    setConjuge(parentesco);
+            }
+        }
     }
 
     public int getId() {
@@ -74,6 +99,30 @@ public class Pessoa {
 
     public void setDtNasc(String dtNasc) {
         this.dtNasc = dtNasc;
+    }
+
+    public Parentesco getMae() {
+        return mae;
+    }
+
+    public void setMae(Parentesco mae) {
+        this.mae = mae;
+    }
+
+    public Parentesco getPai() {
+        return pai;
+    }
+
+    public void setPai(Parentesco pai) {
+        this.pai = pai;
+    }
+
+    public Parentesco getConjuge() {
+        return conjuge;
+    }
+
+    public void setConjuge(Parentesco conjuge) {
+        this.conjuge = conjuge;
     }
 
 }

@@ -32,11 +32,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(Pessoa.CREATE_TABLE);
         db.execSQL(Parentesco.CREATE_TABLE);
         db.execSQL(TipoParentesco.CREATE_TABLE);
+        db.execSQL(TipoParentesco.INSERT_VALORES);
     }
 
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + Pessoa.NOME_TABELA);
+        db.execSQL("DROP TABLE IF EXISTS " + Parentesco.NOME_TABELA);
+        db.execSQL("DROP TABLE IF EXISTS " + TipoParentesco.NOME_TABELA);
+
+        onCreate(db);
+    }
+
+    public void recreate() {
+        SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + Pessoa.NOME_TABELA);
         db.execSQL("DROP TABLE IF EXISTS " + Parentesco.NOME_TABELA);
         db.execSQL("DROP TABLE IF EXISTS " + TipoParentesco.NOME_TABELA);
@@ -90,6 +100,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return id;
+    }
+
+    public long insertParentescoMae(int idPessoa, int idParente) {
+        return insertParentesco(idPessoa, idParente, TipoParentesco.mae);
+    }
+
+    public long insertParentescoPai(int idPessoa, int idParente) {
+        return insertParentesco(idPessoa, idParente, TipoParentesco.pai);
+    }
+
+    public void insertParentescoConjuge(int idPessoa, int idParente) {
+        insertParentesco(idPessoa, idParente, TipoParentesco.conjuge);
+        insertParentesco(idParente, idPessoa, TipoParentesco.conjuge);
     }
 
     public Pessoa getPessoa(long id) {
@@ -146,6 +169,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return parentesco;
     }
 
+    public Parentesco getParentesco(int idPessoa, int idTipoParentesco) {
+        // get readable database as we are not inserting anything
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(Parentesco.NOME_TABELA,
+                new String[]{Parentesco.ID_PARENTESCO, Parentesco.ID_PESSOA, Parentesco.ID_PARENTE, Parentesco.ID_TIPO_PARENTESCO},
+                Parentesco.ID_PESSOA + "=? and " + Parentesco.ID_TIPO_PARENTESCO + "=?",
+                new String[]{String.valueOf(idPessoa),String.valueOf(idTipoParentesco)}, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Parentesco parentesco = new Parentesco(
+                cursor.getInt(cursor.getColumnIndex(Parentesco.ID_PARENTESCO)),
+                cursor.getInt(cursor.getColumnIndex(Parentesco.ID_PESSOA)),
+                cursor.getInt(cursor.getColumnIndex(Parentesco.ID_PARENTE)),
+                cursor.getInt(cursor.getColumnIndex(Parentesco.ID_TIPO_PARENTESCO))
+        );
+
+
+        // close the db connection
+        cursor.close();
+
+        return parentesco;
+    }
+
     public List<Pessoa> getAllPessoas() {
         List<Pessoa> pessoas = new ArrayList<>();
 
@@ -177,11 +226,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return pessoas;
     }
 
-    public List<Parentesco> getAllParentescosByIdPessoa(Pessoa pessoa) {
+    public List<Parentesco> getAllParentescosByIdPessoa(int idPessoa) {
         List<Parentesco> parentescos = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + Pessoa.NOME_TABELA + " WHERE " + Parentesco.ID_PESSOA + " = " +
-                pessoa.getId();
+        String selectQuery = "SELECT  * FROM " + Parentesco.NOME_TABELA + " WHERE " + Parentesco.ID_PESSOA + " = " +
+                idPessoa;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -203,11 +252,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return parentescos;
     }
 
-    public List<Parentesco> getAllParentescosByIdParente(Pessoa pessoa) {
+    public List<Parentesco> getAllParentescosByIdParente(int idParente) {
         List<Parentesco> parentescos = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + Pessoa.NOME_TABELA + " WHERE " + Parentesco.ID_PARENTE + " = " +
-                pessoa.getId();
+        String selectQuery = "SELECT  * FROM " + Parentesco.NOME_TABELA + " WHERE " + Parentesco.ID_PARENTE + " = " +
+                idParente;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -227,6 +276,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return parentescos;
+    }
+
+    public List<TipoParentesco> getAllTiposParentesco() {
+        List<TipoParentesco> tiposParentesco = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TipoParentesco.NOME_TABELA;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                TipoParentesco tipoParentesco = new TipoParentesco();
+                tipoParentesco.setId(cursor.getInt(cursor.getColumnIndex(TipoParentesco.ID_TIPO_PARENTESCO)));
+                tipoParentesco.setNomeTipoParentesco(cursor.getString(cursor.getColumnIndex(TipoParentesco.NOME_TIPO_PARENTESCO)));
+
+                tiposParentesco.add(tipoParentesco);
+            } while (cursor.moveToNext());
+        }
+
+        // close db connection
+        db.close();
+
+        // return notes list
+        return tiposParentesco;
     }
 
     public int getPessoasCount() {
@@ -256,17 +331,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(pessoa.getId())});
     }
 
-    public void deletePessoa(Pessoa pessoa) {
+    public void deletePessoa(int idPessoa) {
+
+
+        ArrayList<Parentesco> parentescos = new ArrayList<Parentesco>();
+        parentescos.addAll(getAllParentescosByIdPessoa(idPessoa));
+        parentescos.addAll(getAllParentescosByIdParente(idPessoa));
+
+        for (Parentesco parentesco : parentescos) {
+            deleteParentesco(parentesco.getId());
+        }
+
         SQLiteDatabase db = this.getWritableDatabase();
+
         db.delete(Pessoa.NOME_TABELA, Pessoa.ID_PESSOA + " = ?",
-                new String[]{String.valueOf(pessoa.getId())});
+                new String[]{String.valueOf(idPessoa)});
         db.close();
     }
 
-    public void deleteParentesco(Parentesco parentesco) {
+    public void deleteParentescoConjuge(int idParentesco) {
+        Parentesco parentesco = this.getParentesco(idParentesco);
+        Parentesco parentesco2 = this.getParentesco(parentesco.getIdParente(),TipoParentesco.conjuge);
+
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Parentesco.NOME_TABELA, Parentesco.ID_PARENTESCO + " = ?",
-                new String[]{String.valueOf(parentesco.getId())});
+                new String[]{String.valueOf(idParentesco)});
+        db.delete(Parentesco.NOME_TABELA, Parentesco.ID_PARENTESCO + " = ?",
+                new String[]{String.valueOf(parentesco2.getId())});
+        db.close();
+    }
+
+    public void deleteParentesco(int idParentesco) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Parentesco.NOME_TABELA, Parentesco.ID_PARENTESCO + " = ?",
+                new String[]{String.valueOf(idParentesco)});
         db.close();
     }
 }
