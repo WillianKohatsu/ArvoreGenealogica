@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.ui.FamilyTreeActivity;
 import com.example.arvoregenealogica.ui.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,7 @@ public class Arvore extends AppCompatActivity {
     private Button btnEditar, btnAdd, btnDeslogar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String usuarioId;
+    DatabaseHelper helper = new DatabaseHelper(this);//Instancia do database helper
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

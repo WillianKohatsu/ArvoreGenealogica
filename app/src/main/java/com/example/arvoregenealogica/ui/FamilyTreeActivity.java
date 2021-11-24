@@ -5,24 +5,29 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.arvoregenealogica.interfaces.OnFamilySelectListener;
 import com.example.arvoregenealogica.model.FamilyMember;
 import com.example.arvoregenealogica.ui.view.FamilyTreeView;
 import com.example.arvoregenealogica.ui.view.FamilyTreeView2;
 import com.example.arvoregenealogica.utils.AssetsUtil;
+import com.example.arvoregenealogica.utils.ConvertPessoa;
 import com.example.arvoregenealogica.utils.ToastMaster;
 import com.example.arvoregenealogica.R;
 import com.example.arvoregenealogica.db.FamilyLiteOrm;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 
 public class FamilyTreeActivity extends BaseActivity {
 
     public static final String HAVE_FOSTER_PARENT = "have_foster_parent";
-
-    private static final String MY_ID = "601";
 
     private Button btnEnlarge;
     private Button btnShrinkDown;
@@ -71,44 +76,55 @@ public class FamilyTreeActivity extends BaseActivity {
     }
 
     private void setData() {
-        haveFosterParent = getIntent().getBooleanExtra(HAVE_FOSTER_PARENT, false);
-        if (haveFosterParent) {
-            ftvTree.setVisibility(View.GONE);
-            ftvTree2.setVisibility(View.VISIBLE);
-            btnEnlarge.setVisibility(View.GONE);
-            btnShrinkDown.setVisibility(View.GONE);
-        } else {
-            ftvTree.setVisibility(View.VISIBLE);
-            ftvTree2.setVisibility(View.GONE);
-        }
-
-        mDatabase = new FamilyLiteOrm(this);
-        String json = AssetsUtil.getAssetsTxtByName(this, "family_tree.txt");
-        List<FamilyMember> mList = JSONObject.parseArray(json, FamilyMember.class);
-        mDatabase.deleteTable();
-        mDatabase.save(mList);
-
-        btnEnlarge.setOnClickListener(click);
-        btnShrinkDown.setOnClickListener(click);
-
-        FamilyMember mFamilyMember = mDatabase.getFamilyTreeById(MY_ID);
-        if (mFamilyMember != null) {
+        try{
+            haveFosterParent = getIntent().getBooleanExtra(HAVE_FOSTER_PARENT, false);
             if (haveFosterParent) {
-                ftvTree2.setFamilyMember(mFamilyMember);
+                ftvTree.setVisibility(View.GONE);
+                ftvTree2.setVisibility(View.VISIBLE);
+                btnEnlarge.setVisibility(View.GONE);
+                btnShrinkDown.setVisibility(View.GONE);
             } else {
-                ftvTree.setFamilyMember(mFamilyMember);
+                ftvTree.setVisibility(View.VISIBLE);
+                ftvTree2.setVisibility(View.GONE);
             }
-        }
 
-        ftvTree.setOnFamilySelectListener(familySelect);
-        ftvTree2.setOnFamilySelectListener(familySelect);
+            mDatabase = new FamilyLiteOrm(this);
+
+            String novoJson = new ConvertPessoa(this).listarJsonFamilyMembers();
+            List<FamilyMember> mList = JSONObject.parseArray(novoJson, FamilyMember.class);
+
+
+            String MY_ID = "1";
+            mDatabase.deleteTable();
+            mDatabase.save(mList);
+
+            btnEnlarge.setOnClickListener(click);
+            btnShrinkDown.setOnClickListener(click);
+
+
+            FamilyMember mFamilyMember = mDatabase.getFamilyTreeById(MY_ID);
+
+            if (mFamilyMember != null) {
+                if (haveFosterParent) {
+                    ftvTree2.setFamilyMember(mFamilyMember);
+                } else {
+                    ftvTree.setFamilyMember(mFamilyMember);
+                }
+            }
+
+            ftvTree.setOnFamilySelectListener(familySelect);
+            ftvTree2.setOnFamilySelectListener(familySelect);
+        }
+        catch (Exception ex){
+            String msg = ex.getMessage();
+        }
     }
 
     private OnFamilySelectListener familySelect = new OnFamilySelectListener() {
         @Override
         public void onFamilySelect(FamilyMember family) {
             if (family.isSelect()) {
-                ToastMaster.toast(family.getMemberName());
+                ToastMaster.toast(family.getMemberName());//Substituir pela tela de exibição de dados do membro selecionado @TODO
             } else {
                 String currentFamilyId = family.getMemberId();
                 FamilyMember currentFamily = mDatabase.getFamilyTreeById(currentFamilyId);

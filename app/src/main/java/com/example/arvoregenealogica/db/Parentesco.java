@@ -25,6 +25,10 @@ public class Parentesco {
                     + ")";
 
     public Parentesco() {
+        id = 0;
+        idPessoa = 0;
+        idParente = 0;
+        idTipoParentesco = 0;
     }
 
     public Parentesco(int id, int idPessoa, int idParente, int idTipoParentesco) {

@@ -3,6 +3,7 @@ package com.example.arvoregenealogica.db;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Pessoa {
     public static final String NOME_TABELA = "pessoa";
@@ -34,7 +35,7 @@ public class Pessoa {
                     + TITULO + " TEXT,"
                     + IMAGEM + " TEXT,"
                     + GENERO + " TEXT,"
-                    + DT_NASC + " DATE"
+                    + DT_NASC + " TEXT"
                     + ")";
 
     public Pessoa() {
@@ -55,16 +56,19 @@ public class Pessoa {
         this.dtNasc = dtNasc;
     }
 
-    public void popularParentescos(ArrayList<Parentesco> parentescos){
+    public void popularParentescos(List<Parentesco> parentescos){
         for (Parentesco parentesco:
                 parentescos) {
             switch (parentesco.getIdTipoParentesco()){
                 case TipoParentesco.mae:
                     setMae(parentesco);
+                    break;
                 case TipoParentesco.pai:
                     setPai(parentesco);
+                    break;
                 case TipoParentesco.conjuge:
                     setConjuge(parentesco);
+                    break;
             }
         }
     }

@@ -33,6 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(Parentesco.CREATE_TABLE);
         db.execSQL(TipoParentesco.CREATE_TABLE);
         db.execSQL(TipoParentesco.INSERT_VALORES);
+
+        //insertPessoa("nome do usuario","Eu","","",""); //Chamar dado do firebase. Não usar junto de insertValoresTeste() @TODO
     }
 
     // Upgrading database
@@ -72,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long insertParentesco(int idPessoa, int idParente, int idTipoParentesco) {
+    private long insertParentesco(int idPessoa, int idParente, int idTipoParentesco) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -222,6 +224,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // close db connection
         db.close();
 
+        for (Pessoa pessoa:
+             pessoas) {
+            List<Parentesco> parentescos = getAllParentescosByIdPessoa(pessoa.getId());
+            pessoa.popularParentescos(parentescos);
+        }
+
         // return notes list
         return pessoas;
     }
@@ -332,8 +340,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deletePessoa(int idPessoa) {
-
-
         ArrayList<Parentesco> parentescos = new ArrayList<Parentesco>();
         parentescos.addAll(getAllParentescosByIdPessoa(idPessoa));
         parentescos.addAll(getAllParentescosByIdParente(idPessoa));
@@ -361,10 +367,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteParentesco(int idParentesco) {
+    public void deleteParentescoMae(int idParentesco) {
+        deleteParentesco(idParentesco);
+    }
+
+    public void deleteParentescoPai(int idParentesco) {
+        deleteParentesco(idParentesco);
+    }
+
+    private void deleteParentesco(int idParentesco) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Parentesco.NOME_TABELA, Parentesco.ID_PARENTESCO + " = ?",
                 new String[]{String.valueOf(idParentesco)});
         db.close();
+    }
+
+    public void insertValoresTeste(){
+        int eu = (int) insertPessoa("Breno","Eu","","Masculino","");
+        int mae = (int)insertPessoa("Marileide","Mãe","","Feminino","");
+        int pai = (int)insertPessoa("Carlos","Pai","","Masculino","");
+        int vovo = (int)insertPessoa("José","Avô","","Masculino","");
+        int vo = (int)insertPessoa("Marília","Avó","","Feminino","");
+        int esp = (int)insertPessoa("Giselle","Esposa","","Feminino","");
+        int filha = (int)insertPessoa("Larissa","Filha","","Feminino","");
+        int neto = (int)insertPessoa("Jorge","Neto","","Masculino","");
+
+        insertParentescoPai(eu,pai);
+        insertParentescoPai(mae,vovo);
+        insertParentescoPai(filha,eu);
+
+        insertParentescoMae(eu, mae);
+        insertParentescoMae(mae, vo);
+        insertParentescoMae(filha, esp);
+        insertParentescoMae(neto, filha);
+
+        insertParentescoConjuge(eu,esp);
+        insertParentescoConjuge(mae,pai);
+        insertParentescoConjuge(vovo,vo);
     }
 }
