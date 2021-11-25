@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class Perfil extends AppCompatActivity {
 
-    private Button btnEdit, btnAddParentesco, btnDelete;
+    private Button btnEdit, btnAddParentesco;
     private TextView perfilNome, perfilTitulo, perfilGenero, perfilDtNasc;
     private DatabaseHelper db = new DatabaseHelper(this);
     public Integer id;
@@ -49,17 +49,6 @@ public class Perfil extends AppCompatActivity {
                 Intent intent = new Intent(Perfil.this, AddParentesco.class);
                 intent.putExtra("id",id);
                 startActivity(intent);
-            }
-        });
-
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (id != 1){
-                    Snackbar snackbar = Snackbar.make(view, "Não deletar usuário principal", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-
-                }else { confirmaExcluir(); }
             }
         });
     }
@@ -108,6 +97,5 @@ public class Perfil extends AppCompatActivity {
         perfilDtNasc = findViewById(R.id.perfilDtNasc);
         btnEdit = findViewById(R.id.btnEdit);
         btnAddParentesco = findViewById(R.id.btnAddParent);;
-        btnDelete = findViewById(R.id.btnDelete);;
     }
 }
