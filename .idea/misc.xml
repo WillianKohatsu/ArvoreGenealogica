@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_arvore.xml" value="0.20520833333333333" />
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_editperfil.xml" value="0.20520833333333333" />
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_lista.xml" value="0.20520833333333333" />
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_parente.xml" value="0.20520833333333333" />
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_parentesco.xml" value="0.20520833333333333" />
+        <entry key="..\:/Libraries/Academic/Fatec/IHC/trab mexer/telasfinal/ArvoreGenealogica/app/src/main/res/layout/activity_perfil.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/background.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/calendar.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/drawable/container_components.xml" value="0.23385416666666667" />

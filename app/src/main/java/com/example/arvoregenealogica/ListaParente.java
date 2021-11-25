@@ -25,8 +25,8 @@ public class ListaParente extends AppCompatActivity {
     public ArrayList<Integer> arrayIds;
     public Integer idSelecionado;
     private DatabaseHelper db = new DatabaseHelper(this);
-    private List<Pessoa> parentes = db.getAllPessoas();
-    public  ArrayList<String> nomesParentes = preencherDados(parentes);
+    private List<Pessoa> parentes = new ArrayList<Pessoa>();
+    public  ArrayList<String> nomesParentes = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class ListaParente extends AppCompatActivity {
         listViewDados.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                idSelecionado = arrayIds.get(i);
+                idSelecionado = parentes.get(i).getId();
                 confirmaExcluir();
                 return true;
             }
@@ -54,7 +54,7 @@ public class ListaParente extends AppCompatActivity {
         listViewDados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                idSelecionado = arrayIds.get(i);
+                idSelecionado = parentes.get(i).getId();
                 abrirTelaPerfil();
             }
         });
@@ -125,5 +125,7 @@ public class ListaParente extends AppCompatActivity {
     private void iniciarComponentes(){
         botao = (Button) findViewById(R.id.buttonAlterar);
         listViewDados = (ListView) findViewById(R.id.listViewDados);
+        parentes = db.getAllPessoas();
+        nomesParentes = preencherDados(parentes);
     }
 }

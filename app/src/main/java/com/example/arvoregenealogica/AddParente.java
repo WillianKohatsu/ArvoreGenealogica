@@ -28,11 +28,11 @@ public class AddParente extends AppCompatActivity {
     private DatabaseHelper db;
     private EditText nomeParente, parentesco;
     private Button btnAdicionar;
-    String[] genero = {"Masculino", "Feminino", "Outros"};
+    String[] genero = {"Masculino", "Feminino", "Outro"};
     String[] mensagem = {"Preencha todos os campos", "Parente adicionado com sucesso"};
 
-    String nome = nomeParente.getText().toString();
-    String titulo = parentesco.getText().toString();
+    String nome = "";
+    String titulo = "";
     String dtNasc, gen;
     String imagem = "";
 
@@ -42,6 +42,7 @@ public class AddParente extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parente);
 
@@ -64,7 +65,8 @@ public class AddParente extends AppCompatActivity {
         });
 
         btnAdicionar.setOnClickListener(view -> {
-
+            nome = nomeParente.getText().toString();
+            titulo = parentesco.getText().toString();
             if(nome.isEmpty() || dtNasc.isEmpty()){
                 Snackbar snackbar = Snackbar.make(view, mensagem[0], Snackbar.LENGTH_SHORT);
                 snackbar.show();
@@ -99,6 +101,7 @@ public class AddParente extends AppCompatActivity {
         parentesco = findViewById(R.id.editParentesco);
         btnAdicionar = findViewById(R.id.btnAdicionar);
         autoCompleteTextView = findViewById(R.id.auto);
+        dtNasc = getTodaysDate();
     }
 
     private String getTodaysDate()

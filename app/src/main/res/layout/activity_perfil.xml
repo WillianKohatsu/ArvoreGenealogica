@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Perfil"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".Perfil">
 
     <TextView
         android:id="@+id/txtTitleCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/perfil"
-        android:textSize="50sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
         android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/perfil"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/containerComponents"
@@ -31,56 +31,56 @@
     <TextView
         android:id="@+id/perfilNome"
         style="@style/Edit_Text"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toTopOf="@id/containerComponents"/>
+        app:layout_constraintStart_toStartOf="@id/containerComponents"
+        app:layout_constraintTop_toTopOf="@id/containerComponents" />
 
     <TextView
         android:id="@+id/perfilTitulo"
         style="@style/Edit_Text"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilNome"/>
+        app:layout_constraintStart_toStartOf="@id/containerComponents"
+        app:layout_constraintTop_toBottomOf="@id/perfilNome" />
 
     <TextView
         android:id="@+id/perfilGenero"
         style="@style/Edit_Text"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilTitulo"/>
+        app:layout_constraintStart_toStartOf="@id/containerComponents"
+        app:layout_constraintTop_toBottomOf="@id/perfilTitulo" />
 
     <TextView
         android:id="@+id/perfilDtNasc"
         style="@style/Edit_Text"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilGenero"/>
+        app:layout_constraintStart_toStartOf="@id/containerComponents"
+        app:layout_constraintTop_toBottomOf="@id/perfilGenero" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEdit"
         style="@style/Button"
-        android:text="@string/bt_alterar"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/bt_alterar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponents"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/containerComponents" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddParent"
         style="@style/Button"
-        android:text="@string/bt_parentesco"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/bt_parentesco"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEdit"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEdit" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnDelete"
         style="@style/Button"
-        android:text="@string/bt_delete"
         android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/bt_delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddParent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddParent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

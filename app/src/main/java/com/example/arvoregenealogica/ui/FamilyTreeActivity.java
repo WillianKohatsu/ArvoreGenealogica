@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.interfaces.OnFamilySelectListener;
 import com.example.arvoregenealogica.model.FamilyMember;
 import com.example.arvoregenealogica.ui.view.FamilyTreeView;
@@ -89,6 +90,9 @@ public class FamilyTreeActivity extends BaseActivity {
             }
 
             mDatabase = new FamilyLiteOrm(this);
+
+            new DatabaseHelper(this).recreate();
+            new DatabaseHelper(this).insertValoresTeste();
 
             String novoJson = new ConvertPessoa(this).listarJsonFamilyMembers();
             List<FamilyMember> mList = JSONObject.parseArray(novoJson, FamilyMember.class);
