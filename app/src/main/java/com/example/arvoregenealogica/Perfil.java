@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 public class Perfil extends AppCompatActivity {
 
     private Button btnEdit, btnAddParentesco, btnDelete;
@@ -24,6 +26,7 @@ public class Perfil extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         iniciarComponentes();
 
