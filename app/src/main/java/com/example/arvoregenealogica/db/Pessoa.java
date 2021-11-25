@@ -44,6 +44,7 @@ public class Pessoa {
     public Pessoa(int id, String nome, String titulo, String imagem, String genero, String dtNasc) {
         this.id = id;
         this.nome = nome;
+        this.titulo = titulo;
         this.imagem = imagem;
         this.genero = genero;
         this.dtNasc = dtNasc;

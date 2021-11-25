@@ -2,9 +2,6 @@ package com.example.arvoregenealogica;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,22 +20,20 @@ import java.util.List;
 
 public class ListaParente extends AppCompatActivity {
 
-    private SQLiteDatabase bancoDados;
     public ListView listViewDados;
     public Button botao;
     public ArrayList<Integer> arrayIds;
     public Integer idSelecionado;
-    private DatabaseHelper db;
+    private DatabaseHelper db = new DatabaseHelper(this);
+    private List<Pessoa> parentes = db.getAllPessoas();
+    public  ArrayList<String> nomesParentes = preencherDados(parentes);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lista_parente);
+        setContentView(R.layout.activity_lista);
 
-        List<Pessoa> parentes = db.getAllPessoas();
-
-        listViewDados = (ListView) findViewById(R.id.listViewDados);
-        botao = (Button) findViewById(R.id.buttonAlterar);
+        iniciarComponentes();
 
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,28 +69,17 @@ public class ListaParente extends AppCompatActivity {
     }
 
     public void listarDados(){
-        /*try {
-            arrayIds = new ArrayList<>();
-            Cursor meuCursor;
-            ArrayList<String> linhas = new ArrayList<String>();
-            ArrayAdapter meuAdapter = new ArrayAdapter<String>(
-                    this,
-                    android.R.layout.simple_list_item_1,
-                    android.R.id.text1,
-                    linhas
-            );
-            listViewDados.setAdapter(meuAdapter);
-            meuCursor.moveToFirst();
-            while(meuCursor!=null){
-                linhas.add(meuCursor.getString(1));
-                arrayIds.add(meuCursor.getInt(0));
-                meuCursor.moveToNext();
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nomesParentes);
+        listViewDados.setAdapter(arrayAdapter);
     }
+
+    private ArrayList<String> preencherDados(List<Pessoa> parentes) {
+        ArrayList<String> dados = new ArrayList<String>();
+        for (Pessoa pessoa:
+                parentes) {
+            dados.add(pessoa.getNome());
+        }
+        return dados;}
 
     public void abrirTelaCadastro(){
         Intent intent = new Intent(this,AddParente.class);
@@ -125,13 +109,8 @@ public class ListaParente extends AppCompatActivity {
     public void excluir(){
         //Toast.makeText(this, i.toString(), Toast.LENGTH_SHORT).show();
         try{
-            bancoDados = openOrCreateDatabase("crudapp", MODE_PRIVATE, null);
-            String sql = "DELETE FROM coisa WHERE id =?";
-            SQLiteStatement stmt = bancoDados.compileStatement(sql);
-            stmt.bindLong(1, idSelecionado);
-            stmt.executeUpdateDelete();
+            db.deletePessoa(idSelecionado);
             listarDados();
-            bancoDados.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -141,5 +120,10 @@ public class ListaParente extends AppCompatActivity {
         Intent intent = new Intent(this, Perfil.class);
         intent.putExtra("id",idSelecionado);
         startActivity(intent);
+    }
+
+    private void iniciarComponentes(){
+        botao = (Button) findViewById(R.id.buttonAlterar);
+        listViewDados = (ListView) findViewById(R.id.listViewDados);
     }
 }

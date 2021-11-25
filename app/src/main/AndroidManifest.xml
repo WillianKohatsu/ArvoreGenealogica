@@ -21,6 +21,7 @@
         <activity android:name=".Perfil"/>
         <activity android:name=".ListaParente"/>
         <activity android:name=".AddParente"/>
+        <activity android:name=".AddParentesco"/>
         <activity android:name=".Arvore"/>
         <activity android:name=".FormCadastro" />
         <activity android:name=".Login" />

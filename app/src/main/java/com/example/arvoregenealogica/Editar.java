@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -28,18 +29,18 @@ public class Editar extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
 
-    private DatabaseHelper db;
+    private DatabaseHelper db = new DatabaseHelper(this);;
     private EditText nomeParente, parentesco;
+    private TextInputLayout txtGenero;
     private Button btnAdicionar;
     public Integer id;
-    Pessoa pessoa;
+    private Pessoa pessoa;
     String[] genero = {"Masculino", "Feminino", "Outros"};
     String[] mensagem = {"Preencha todos os campos", "Dados alterados com sucesso"};
 
     String nome = nomeParente.getText().toString();
     String titulo = parentesco.getText().toString();
     String dtNasc, gen;
-    String imagem = "";
 
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItem;
@@ -55,13 +56,21 @@ public class Editar extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
+        String btnDate = db.getPessoa(id).getDtNasc();
+        String hintNome = db.getPessoa(id).getNome();
+        String hintParentesco = db.getPessoa(id).getTitulo();
+        String hintGenero = db.getPessoa(id).getGenero();
+
+        nomeParente.setHint(hintNome);
+        parentesco.setHint(hintParentesco);
+        txtGenero.setHint(hintGenero);
 
         adapterItem = new ArrayAdapter<String>(this, R.layout.list_item,genero);
         autoCompleteTextView.setAdapter(adapterItem);
 
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
-        dateButton.setText(getTodaysDate());
+        dateButton.setText(btnDate);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,7 +82,7 @@ public class Editar extends AppCompatActivity {
 
         btnAdicionar.setOnClickListener(view -> {
 
-            if(nome.isEmpty() || dtNasc.isEmpty()){
+            if(nome.isEmpty() || titulo.isEmpty() ||dtNasc.isEmpty()){
                 Snackbar snackbar = Snackbar.make(view, mensagem[0], Snackbar.LENGTH_SHORT);
                 snackbar.show();
             }else{
@@ -83,8 +92,8 @@ public class Editar extends AppCompatActivity {
     }
 
     private void alterarDados(View v){
-        db = new DatabaseHelper(this);
-        //db.updatePessoa(nome, titulo, imagem, gen, dtNasc);
+        pessoa = new Pessoa(id, nome, titulo, "", gen, dtNasc);
+        db.updatePessoa(pessoa);
         Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
         snackbar.show();
         new Handler().postDelayed(new Runnable() {
@@ -107,16 +116,7 @@ public class Editar extends AppCompatActivity {
         parentesco = findViewById(R.id.editParentesco);
         btnAdicionar = findViewById(R.id.btnAdicionar);
         autoCompleteTextView = findViewById(R.id.auto);
-    }
-
-    private String getTodaysDate()
-    {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        month = month + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        return makeDateString(day, month, year);
+        txtGenero = findViewById(R.id.editGenero);
     }
 
     private void initDatePicker()
