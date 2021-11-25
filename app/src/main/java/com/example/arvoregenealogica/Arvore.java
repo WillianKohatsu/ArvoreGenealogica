@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.ui.FamilyTreeActivity;
-import com.example.arvoregenealogica.ui.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,9 +23,9 @@ import java.util.Objects;
 public class Arvore extends AppCompatActivity {
 
     private TextView nomeUsuario, emailUsuario;
-    private Button btnEditar, btnAdd, btnDeslogar;
+    private Button btnArvore, btnAdd, btnListar, btnDeslogar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String usuarioId;
+    private String usuarioId, titulo = "Eu", img="", genero = "", dtNasc = "";
     DatabaseHelper helper = new DatabaseHelper(this);//Instancia do database helper
 
     @Override
@@ -41,7 +40,7 @@ public class Arvore extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Arvore.this, Login.class);
+                Intent intent = new Intent(Arvore.this,Login.class);
                 startActivity(intent);
                 finish();
             }
@@ -50,18 +49,24 @@ public class Arvore extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Arvore.this, Parente.class);
+                Intent intent = new Intent(Arvore.this, AddParente.class);
                 startActivity(intent);
-                finish();
             }
         });
 
-        btnEditar.setOnClickListener(new View.OnClickListener() {
+        btnArvore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Arvore.this, FamilyTreeActivity.class);
                 startActivity(intent);
-                finish();
+            }
+        });
+
+        btnListar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Arvore.this, ListaParente.class);
+                startActivity(intent);
             }
         });
     }
@@ -87,7 +92,8 @@ public class Arvore extends AppCompatActivity {
         nomeUsuario = findViewById(R.id.txtNomeUsuario);
         emailUsuario = findViewById(R.id.txtEmailUsuario);
         btnDeslogar = findViewById(R.id.btnDeslogar);
-        btnEditar = findViewById(R.id.btnEditar);
+        btnArvore = findViewById(R.id.btnArvore);
+        btnListar = findViewById(R.id.btnListar);
         btnAdd = findViewById(R.id.btnAdicionar);
     }
 }

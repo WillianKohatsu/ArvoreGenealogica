@@ -21,8 +21,10 @@
     <string name="title_cadastro">Cadastre-se</string>
     <string name="bt_cadastrar">Cadastrar</string>
     <string name="bt_deslogar">Deslogar</string>
+    <string name="bt_lista">Lista de parentes</string>
     <string name="bt_login">Entrar</string>
     <string name="bt_add">Adicionar parente</string>
+    <string name="bt_alterar">Alterar dados</string>
     <string name="bt_edit">Visualizar árvore</string>
 
     <string name="ex_nome">Willian Massanobu Kohatsu</string>

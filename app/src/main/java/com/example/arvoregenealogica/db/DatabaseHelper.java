@@ -6,14 +6,26 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.arvoregenealogica.db.Parentesco;
 import com.example.arvoregenealogica.db.Pessoa;
 import com.example.arvoregenealogica.db.TipoParentesco;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
+    //Firebase
+    private String usuarioId;
+    FirebaseFirestore fireDB = FirebaseFirestore.getInstance();
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
@@ -35,6 +47,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(TipoParentesco.INSERT_VALORES);
 
         //insertPessoa("nome do usuario","Eu","","",""); //Chamar dado do firebase. Não usar junto de insertValoresTeste() @TODO
+        usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DocumentReference documentReference = fireDB.collection("usuarios").document(usuarioId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                insertPessoa(documentSnapshot.getString("nome"), "Eu", "", "", "");
+            }
+        });
     }
 
     // Upgrading database

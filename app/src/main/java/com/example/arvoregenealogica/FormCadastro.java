@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,10 +28,13 @@ import java.util.Objects;
 
 public class FormCadastro extends AppCompatActivity {
 
+    private DatabaseHelper dbh;
     private EditText editNome, editEmail, editSenha;
     private Button btnCadastrar;
     String[] mensagem = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
-    String usuarioId;
+    String usuarioId, titulo = "Eu";
+    String dtNasc, gen;
+    String imagem = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +96,10 @@ public class FormCadastro extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, String> usuarios = new HashMap<>();
         usuarios.put("nome", nome);
+
+        //cadastro sqplite
+        dbh = new DatabaseHelper(this);
+        dbh.insertPessoa(nome, titulo, imagem, gen, dtNasc);
 
         usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

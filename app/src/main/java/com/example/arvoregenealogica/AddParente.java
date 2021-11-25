@@ -1,5 +1,7 @@
 package com.example.arvoregenealogica;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -13,28 +15,21 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.arvoregenealogica.db.DatabaseHelper;
-import com.example.arvoregenealogica.db.Pessoa;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.Objects;
 
-public class Editar extends AppCompatActivity {
+public class AddParente extends AppCompatActivity {
 
-    //Botão de data
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-
     private DatabaseHelper db;
     private EditText nomeParente, parentesco;
     private Button btnAdicionar;
-    public Integer id;
-    Pessoa pessoa;
     String[] genero = {"Masculino", "Feminino", "Outros"};
-    String[] mensagem = {"Preencha todos os campos", "Dados alterados com sucesso"};
+    String[] mensagem = {"Preencha todos os campos", "Parente adicionado com sucesso"};
 
     String nome = nomeParente.getText().toString();
     String titulo = parentesco.getText().toString();
@@ -48,13 +43,10 @@ public class Editar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editperfil);
+        setContentView(R.layout.activity_parente);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
         iniciarComponentes();
-
-        Intent intent = getIntent();
-        id = intent.getIntExtra("id",0);
 
         adapterItem = new ArrayAdapter<String>(this, R.layout.list_item,genero);
         autoCompleteTextView.setAdapter(adapterItem);
@@ -77,14 +69,14 @@ public class Editar extends AppCompatActivity {
                 Snackbar snackbar = Snackbar.make(view, mensagem[0], Snackbar.LENGTH_SHORT);
                 snackbar.show();
             }else{
-                alterarDados(view);
+                cadastrarParente(view);
             }
         });
     }
 
-    private void alterarDados(View v){
+    private void cadastrarParente(View v){
         db = new DatabaseHelper(this);
-        //db.updatePessoa(nome, titulo, imagem, gen, dtNasc);
+        db.insertPessoa(nome, titulo, imagem, gen, dtNasc);
         Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
         snackbar.show();
         new Handler().postDelayed(new Runnable() {
@@ -97,7 +89,7 @@ public class Editar extends AppCompatActivity {
     }
 
     private void telaArvore(){
-        Intent intent = new Intent(Editar.this, Arvore.class);
+        Intent intent = new Intent(AddParente.this, Arvore.class);
         startActivity(intent);
         finish();
     }

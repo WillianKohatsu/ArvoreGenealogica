@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Parente">
+    tools:context=".AddParente">
 
     <View
         android:id="@+id/containerUser"
@@ -82,17 +82,22 @@
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editData"
-        android:autofillHints="@string/"
-        style="@style/Edit_Text"
-        android:hint="@string/ani"
-        android:drawableEnd="@drawable/ic_date"
-        android:inputType="date"
+    <Button
+        android:id="@+id/datePickerButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ani"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        style="?android:spinnerStyle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/containerComponents"
         app:layout_constraintEnd_toEndOf="@id/containerComponents"
         app:layout_constraintTop_toBottomOf="@id/editGenero"
-        />
+        android:onClick="openDatePicker"/>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAdicionar"

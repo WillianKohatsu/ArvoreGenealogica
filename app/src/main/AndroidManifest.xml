@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity android:name=".Editar"/>
-        <activity android:name=".Parente"/>
+        <activity android:name=".Perfil"/>
+        <activity android:name=".ListaParente"/>
+        <activity android:name=".AddParente"/>
         <activity android:name=".Arvore"/>
         <activity android:name=".FormCadastro" />
         <activity android:name=".Login" />
