@@ -19,6 +19,7 @@ import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.type.DateTime;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -38,8 +39,8 @@ public class Editar extends AppCompatActivity {
     String[] genero = {"Masculino", "Feminino", "Outros"};
     String[] mensagem = {"Preencha todos os campos", "Dados alterados com sucesso"};
 
-    String nome = nomeParente.getText().toString();
-    String titulo = parentesco.getText().toString();
+    String nome = "";
+    String titulo = "";
     String dtNasc, gen;
 
     AutoCompleteTextView autoCompleteTextView;
@@ -61,9 +62,13 @@ public class Editar extends AppCompatActivity {
         String hintParentesco = db.getPessoa(id).getTitulo();
         String hintGenero = db.getPessoa(id).getGenero();
 
-        nomeParente.setHint(hintNome);
-        parentesco.setHint(hintParentesco);
+        nomeParente.setText(hintNome);
+        parentesco.setText(hintParentesco);
         txtGenero.setHint(hintGenero);
+
+        dtNasc = db.getPessoa(id).getDtNasc();
+
+        gen = getGenero(db.getPessoa(id).getGenero());
 
         adapterItem = new ArrayAdapter<String>(this, R.layout.list_item,genero);
         autoCompleteTextView.setAdapter(adapterItem);
@@ -81,7 +86,8 @@ public class Editar extends AppCompatActivity {
         });
 
         btnAdicionar.setOnClickListener(view -> {
-
+            nome = nomeParente.getText().toString();
+            titulo = parentesco.getText().toString();
             if(nome.isEmpty() || titulo.isEmpty() ||dtNasc.isEmpty()){
                 Snackbar snackbar = Snackbar.make(view, mensagem[0], Snackbar.LENGTH_SHORT);
                 snackbar.show();
@@ -117,6 +123,9 @@ public class Editar extends AppCompatActivity {
         btnAdicionar = findViewById(R.id.btnAdicionar);
         autoCompleteTextView = findViewById(R.id.auto);
         txtGenero = findViewById(R.id.editGenero);
+        nome = nomeParente.getText().toString();
+        titulo = parentesco.getText().toString();
+
     }
 
     private void initDatePicker()

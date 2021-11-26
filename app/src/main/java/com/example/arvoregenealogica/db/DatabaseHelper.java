@@ -47,14 +47,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(TipoParentesco.INSERT_VALORES);
 
         //insertPessoa("nome do usuario","Eu","","",""); //Chamar dado do firebase. Não usar junto de insertValoresTeste() @TODO
-        usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        /*usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference documentReference = fireDB.collection("usuarios").document(usuarioId);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 insertPessoa(documentSnapshot.getString("nome"), "Eu", "", "", "");
             }
-        });
+        });*/
     }
 
     // Upgrading database

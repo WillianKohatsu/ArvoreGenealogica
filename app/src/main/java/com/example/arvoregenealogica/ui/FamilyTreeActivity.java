@@ -1,12 +1,14 @@
 package com.example.arvoregenealogica.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.arvoregenealogica.Perfil;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.interfaces.OnFamilySelectListener;
 import com.example.arvoregenealogica.model.FamilyMember;
@@ -91,8 +93,8 @@ public class FamilyTreeActivity extends BaseActivity {
 
             mDatabase = new FamilyLiteOrm(this);
 
-            new DatabaseHelper(this).recreate();
-            new DatabaseHelper(this).insertValoresTeste();
+            //new DatabaseHelper(this).recreate();
+            //new DatabaseHelper(this).insertValoresTeste();
 
             String novoJson = new ConvertPessoa(this).listarJsonFamilyMembers();
             List<FamilyMember> mList = JSONObject.parseArray(novoJson, FamilyMember.class);
@@ -124,11 +126,13 @@ public class FamilyTreeActivity extends BaseActivity {
         }
     }
 
+
     private OnFamilySelectListener familySelect = new OnFamilySelectListener() {
         @Override
         public void onFamilySelect(FamilyMember family) {
             if (family.isSelect()) {
-                ToastMaster.toast(family.getMemberName());//Substituir pela tela de exibição de dados do membro selecionado @TODO
+                abrirTelaPerfil(family.getMemberId());
+                //ToastMaster.toast(family.getMemberName());//Substituir pela tela de exibição de dados do membro selecionado @TODO
             } else {
                 String currentFamilyId = family.getMemberId();
                 FamilyMember currentFamily = mDatabase.getFamilyTreeById(currentFamilyId);
@@ -158,4 +162,10 @@ public class FamilyTreeActivity extends BaseActivity {
             }
         }
     };
+
+    public void abrirTelaPerfil(String id){
+        Intent intent = new Intent(this, Perfil.class);
+        intent.putExtra("id",Integer.parseInt(id));
+        startActivity(intent);
+    }
 }

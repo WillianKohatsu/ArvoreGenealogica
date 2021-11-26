@@ -23,8 +23,8 @@ public class AddParentesco extends AppCompatActivity {
     private DatabaseHelper db = new DatabaseHelper(this);
     public Integer id, idPar;
     String[] parentesco = {"Pai", "Mãe", "Conjuge"};
-    private List<Pessoa> parentes = db.getAllPessoas();
-    public ArrayList<String> nomesParentes = preencherDados(parentes);
+    private List<Pessoa> parentes = new ArrayList<>();
+    public ArrayList<String> nomesParentes = new ArrayList<>();
 
     AutoCompleteTextView autoCompleteTextView, autoCompleteTextView2;
     ArrayAdapter<String> adapterItem, adapterName;
@@ -95,9 +95,9 @@ public class AddParentesco extends AppCompatActivity {
 
     private void addParentesco(String tipo){
         switch (tipo){
-            case "pai" : db.insertParentescoPai(id, idPar);break;
-            case "mae" : db.insertParentescoMae(id, idPar);break;
-            case "conjuge" : db.insertParentescoConjuge(id, idPar);break;
+            case "pai" : db.insertParentescoPai(idPar, id);break;
+            case "mae" : db.insertParentescoMae(idPar, id);break;
+            case "conjuge" : db.insertParentescoConjuge(idPar, id);break;
         }
     }
 
@@ -106,5 +106,8 @@ public class AddParentesco extends AppCompatActivity {
         buttonAdd = findViewById(R.id.btnAddPar);
         autoCompleteTextView2 = findViewById(R.id.auto2);
         autoCompleteTextView = findViewById(R.id.auto);
+        parentes = db.getAllPessoas();
+        nomesParentes = preencherDados(parentes);
+        String test = "";
     }
 }

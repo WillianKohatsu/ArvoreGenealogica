@@ -95,6 +95,7 @@ public class ListaParente extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 excluir();
+                iniciarComponentes();
                 listarDados();
             }
         });
