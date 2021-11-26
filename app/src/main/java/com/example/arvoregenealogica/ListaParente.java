@@ -17,6 +17,7 @@ import com.example.arvoregenealogica.db.Pessoa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ListaParente extends AppCompatActivity {
 
@@ -32,6 +33,8 @@ public class ListaParente extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         iniciarComponentes();
 
