@@ -7,6 +7,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".AddParente">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:title="Adicionar Parente"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        />
+
     <View
         android:id="@+id/containerUser"
         android:layout_width="150dp"
@@ -15,7 +27,7 @@
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <ImageView
         android:contentDescription="@string/nome"
@@ -115,11 +127,13 @@
 
     <Button
         android:id="@+id/datePickerButton"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/ani"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:textSize="24sp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         style="?android:spinnerStyle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

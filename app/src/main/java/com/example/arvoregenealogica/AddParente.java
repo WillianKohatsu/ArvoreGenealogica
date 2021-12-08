@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
@@ -24,6 +25,7 @@ import java.util.Objects;
 public class AddParente extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
+    private MaterialToolbar toolbar;
     private Button dateButton;
     private DatabaseHelper db;
     private EditText nomeParente, parentesco;
@@ -73,6 +75,11 @@ public class AddParente extends AppCompatActivity {
             }else{
                 cadastrarParente(view);
             }
+        });
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
         });
     }
 

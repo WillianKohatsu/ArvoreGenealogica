@@ -27,11 +27,12 @@
     <string name="bt_deslogar">Deslogar</string>
     <string name="bt_lista">Lista de parentes</string>
     <string name="bt_login">Entrar</string>
-    <string name="bt_add">Adicionar parente</string>
+    <string name="bt_add_parent">Adicionar parente</string>
     <string name="bt_alterar">Alterar dados</string>
     <string name="bt_edit">Visualizar árvore</string>
     <string name="bt_delete">Excluir parente</string>
     <string name="bt_parentesco">Adicionar parentesco</string>
+    <string name="bt_add">Adicionar</string>
 
     <string name="ex_nome">Willian Massanobu Kohatsu</string>
     <string name="ex_email">willian.kohatsu@gmail.com</string>

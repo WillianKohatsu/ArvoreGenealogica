@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -26,9 +26,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class FormCadastro extends AppCompatActivity {
+public class FormCadastroActivity extends AppCompatActivity {
 
     private DatabaseHelper dbh;
+    private MaterialToolbar toolbar;
     private EditText editNome, editEmail, editSenha;
     private Button btnCadastrar;
     String[] mensagem = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
@@ -56,6 +57,10 @@ public class FormCadastro extends AppCompatActivity {
                 cadastrarUsuario(view);
             }
         });
+
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
+        });
     }
 
     private void cadastrarUsuario(View v){
@@ -67,7 +72,7 @@ public class FormCadastro extends AppCompatActivity {
                 salvarDadosUsuario();
                 Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
                 snackbar.show();
-                Intent intent = new Intent(FormCadastro.this, Login.class);
+                Intent intent = new Intent(FormCadastroActivity.this, Login.class);
                 startActivity(intent);
                 finish();
             }else{
@@ -124,5 +129,6 @@ public class FormCadastro extends AppCompatActivity {
         editEmail = findViewById(R.id.editEmail);
         editSenha = findViewById(R.id.editSenha);
         btnCadastrar = findViewById(R.id.btnCadastrar);
+        toolbar = findViewById(R.id.toolbar);
     }
 }

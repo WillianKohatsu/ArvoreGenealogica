@@ -27,35 +27,65 @@
         app:layout_constraintTop_toTopOf="@id/containerUser"
         app:layout_constraintBottom_toBottomOf="@id/containerUser"/>
 
-    <View
-        android:id="@+id/containerComponents"
-        style="@style/ContainerComponents"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nome"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="333dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="28dp"
+        app:hintTextColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="@string/nome"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:textColor="@color/white"
+        app:boxStrokeColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerUser" />
+        app:layout_constraintTop_toBottomOf="@id/containerUser">
 
-    <EditText
-        android:id="@+id/editNome"
-        style="@style/Edit_Text"
-        android:autofillHints="@string/nome"
-        android:hint="@string/nome"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintTop_toTopOf="@id/containerComponents"
-        tools:ignore="DuplicateSpeakableTextCheck" />
 
-    <EditText
-        android:id="@+id/editParentesco"
-        style="@style/Edit_Text"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNome"
+            android:textColorHint="@color/white"
+            android:background="@color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="textCapWords"
+            android:autofillHints="@string/nome"
+            android:textColor="@color/white"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/parentesco"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="28dp"
+        app:hintTextColor="@color/white"
+        android:textColorHint="@color/white"
         android:hint="@string/parentesco"
-        android:autofillHints="@string/parentesco"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/editNome"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        android:textColor="@color/white"
+        app:boxStrokeColor="@color/orange"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nome">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editParentesco"
+            android:textColorHint="@color/white"
+            android:background="@color/transparent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="textCapWords"
+            android:autofillHints="@string/nome"
+            android:textColor="@color/white"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editGenero"
@@ -68,16 +98,19 @@
         android:layout_height="60dp"
         android:layout_margin="16dp"
         android:hint="@string/genero"
-        app:boxStrokeColor="@color/black"
+        android:textColorHint="@color/white"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
         app:boxStrokeWidth="2dp"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/editParentesco">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/parentesco">
 
         <AutoCompleteTextView
             android:id="@+id/auto"
             android:layout_width="335dp"
             android:layout_height="55dp"
+            android:textColor="@color/white"
             android:inputType="none"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -93,8 +126,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editGenero"
         android:onClick="openDatePicker"/>
 
@@ -106,7 +139,7 @@
         android:text="@string/bt_alterar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponents"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

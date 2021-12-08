@@ -20,25 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/containerComponents"
-        style="@style/ContainerComponents"
-        android:layout_height="320dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTitle" />
-
-    <TextView
-        android:id="@+id/parentesco_nome"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/parenteadd"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintTop_toTopOf="@id/containerComponents" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nomeP"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -46,19 +27,23 @@
         android:layout_height="60dp"
         android:layout_margin="16dp"
         android:hint="@string/nome"
+        app:hintTextColor="@color/white"
+        android:textColorHint="@color/white"
         app:boxCornerRadiusBottomEnd="20dp"
         app:boxCornerRadiusBottomStart="20dp"
         app:boxCornerRadiusTopEnd="20dp"
+        android:layout_marginTop="80dp"
         app:boxCornerRadiusTopStart="20dp"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/parentesco_nome">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle">
 
         <AutoCompleteTextView
             android:id="@+id/auto2"
             android:layout_width="335dp"
+            android:textColor="@color/white"
             android:layout_height="55dp"
             android:inputType="none"
             android:textSize="18sp" />
@@ -73,19 +58,22 @@
         android:layout_margin="16dp"
         android:hint="@string/parentesco"
         app:boxCornerRadiusBottomEnd="20dp"
+        app:hintTextColor="@color/white"
+        android:textColorHint="@color/white"
         app:boxCornerRadiusBottomStart="20dp"
         app:boxCornerRadiusTopEnd="20dp"
         app:boxCornerRadiusTopStart="20dp"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nomeP">
 
         <AutoCompleteTextView
             android:id="@+id/auto"
             android:layout_width="335dp"
             android:layout_height="55dp"
+            android:textColor="@color/white"
             android:inputType="none"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,9 +82,10 @@
         android:id="@+id/btnAddPar"
         style="@style/Button"
         android:layout_marginTop="30dp"
-        android:text="@string/bt_parentesco"
+        android:text="@string/bt_add_parent"
+        android:layout_marginBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponents" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
