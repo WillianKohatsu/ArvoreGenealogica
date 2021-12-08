@@ -90,14 +90,14 @@ public class AddParentesco extends AppCompatActivity {
     }
 
     private void getParentId(int id){
-        idPar = id;
+        idPar = parentes.get(id).getId();
     }
 
     private void addParentesco(String tipo){
         switch (tipo){
-            case "pai" : db.insertParentescoPai(idPar, id);break;
-            case "mae" : db.insertParentescoMae(idPar, id);break;
-            case "conjuge" : db.insertParentescoConjuge(idPar, id);break;
+            case "pai" : db.insertParentescoPai(id, idPar); finish(); break;
+            case "mae" : db.insertParentescoMae(id, idPar); finish();break;
+            case "conjuge" : db.insertParentescoConjuge(id, idPar);finish(); break;
         }
     }
 
