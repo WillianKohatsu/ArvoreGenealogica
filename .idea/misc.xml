@@ -46,9 +46,10 @@
         <entry key="..\:/Users/Willian/AndroidStudioProjects/ArvoreGenealogica/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.2203125" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.2203125" />
+        <entry key="app/src/main/res/drawable/button_secondary.xml" value="0.31197916666666664" />
         <entry key="app/src/main/res/drawable/ic_email.xml" value="0.30052083333333335" />
         <entry key="app/src/main/res/layout/activity_form_cadastro.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.10625" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
       </map>
     </option>
   </component>
