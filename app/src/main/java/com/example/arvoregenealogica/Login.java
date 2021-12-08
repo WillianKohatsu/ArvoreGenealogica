@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void telaArvore(){
-        Intent intent = new Intent(Login.this, Arvore.class);
+        Intent intent = new Intent(this, Arvore.class);
         startActivity(intent);
         finish();
     }
