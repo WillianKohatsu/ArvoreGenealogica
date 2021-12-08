@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         iniciarComponentes();
 
         txt_tela_cadastro.setOnClickListener(view -> {
-            Intent intent = new Intent(Login.this, FormCadastro.class);
+            Intent intent = new Intent(Login.this, FormCadastroActivity.class);
             startActivity(intent); });
 
         btnLogin.setOnClickListener(view -> {
@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void telaArvore(){
-        Intent intent = new Intent(Login.this, Arvore.class);
+        Intent intent = new Intent(this, Arvore.class);
         startActivity(intent);
         finish();
     }

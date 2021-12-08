@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class ListaParente extends AppCompatActivity {
 
     public ListView listViewDados;
     public Button botao;
+    private MaterialToolbar toolbar;
     public ArrayList<Integer> arrayIds;
     public Integer idSelecionado;
     private DatabaseHelper db = new DatabaseHelper(this);
@@ -63,6 +65,10 @@ public class ListaParente extends AppCompatActivity {
         });
 
         listarDados();
+
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
+        });
     }
 
     @Override
@@ -131,5 +137,6 @@ public class ListaParente extends AppCompatActivity {
         listViewDados = (ListView) findViewById(R.id.listViewDados);
         parentes = db.getAllPessoas();
         nomesParentes = preencherDados(parentes);
+        toolbar = findViewById(R.id.toolbar);
     }
 }

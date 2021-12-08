@@ -23,7 +23,7 @@
         <activity android:name=".AddParente"/>
         <activity android:name=".AddParentesco"/>
         <activity android:name=".Arvore"/>
-        <activity android:name=".FormCadastro" />
+        <activity android:name=".FormCadastroActivity" />
         <activity android:name=".Login" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.FamilyTreeActivity" />
