@@ -19,11 +19,12 @@ import java.util.Objects;
 
 public class Perfil extends AppCompatActivity {
 
-    private Button btnEdit, btnAddParentesco;
+    private Button btnEdit, btnAddParentesco, btnLimparParentescos;
     private MaterialToolbar toolbar;
     private TextView perfilNome, perfilTitulo, perfilGenero, perfilDtNasc;
     private DatabaseHelper db = new DatabaseHelper(this);
     public Integer id;
+    Pessoa pessoa = new Pessoa();
 
     @Override
     public void onCreate( Bundle savedInstanceState) {
@@ -31,10 +32,12 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        iniciarComponentes();
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
+
+        iniciarComponentes();
+
         carregarDadosPerfil();
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +46,21 @@ public class Perfil extends AppCompatActivity {
                 Intent intent = new Intent(Perfil.this, Editar.class);
                 intent.putExtra("id",id);
                 startActivity(intent);
+            }
+        });
+
+        btnLimparParentescos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pessoa.getPai() == null && pessoa.getMae() == null && pessoa.getConjuge() == null) {
+                    Snackbar snackbar = Snackbar.make(view, "Pessoa não possui parentescos", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
+                else{
+                    db.deleteAllParentescos(pessoa.getId());
+                    Snackbar snackbar = Snackbar.make(view, "Parentescos removidos com sucesso", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
             }
         });
 
@@ -112,6 +130,9 @@ public class Perfil extends AppCompatActivity {
         perfilDtNasc = findViewById(R.id.perfilDtNasc);
         btnEdit = findViewById(R.id.btnEdit);
         btnAddParentesco = findViewById(R.id.btnAddParent);
+        btnLimparParentescos = findViewById(R.id.btnClearParentescos);
         toolbar = findViewById(R.id.toolbar);
+        pessoa = db.getPessoa(id);
+        pessoa.popularParentescos(db.getAllParentescosByIdPessoa(id));
     }
 }

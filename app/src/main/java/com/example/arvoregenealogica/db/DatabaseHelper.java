@@ -361,6 +361,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deletePessoa(int idPessoa) {
+        deleteAllParentescos(idPessoa);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(Pessoa.NOME_TABELA, Pessoa.ID_PESSOA + " = ?",
+                new String[]{String.valueOf(idPessoa)});
+        db.close();
+    }
+
+    public void deleteAllParentescos(int idPessoa){
         ArrayList<Parentesco> parentescos = new ArrayList<Parentesco>();
         parentescos.addAll(getAllParentescosByIdPessoa(idPessoa));
         parentescos.addAll(getAllParentescosByIdParente(idPessoa));
@@ -368,12 +378,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (Parentesco parentesco : parentescos) {
             deleteParentesco(parentesco.getId());
         }
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(Pessoa.NOME_TABELA, Pessoa.ID_PESSOA + " = ?",
-                new String[]{String.valueOf(idPessoa)});
-        db.close();
     }
 
     public void deleteParentescoConjuge(int idParentesco) {

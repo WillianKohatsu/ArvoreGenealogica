@@ -37,5 +37,6 @@
     <string name="ex_nome">Willian Massanobu Kohatsu</string>
     <string name="ex_email">willian.kohatsu@gmail.com</string>
     <string name="imagem">Imagem</string>
+    <string name="bt_limpar">Remover Parentescos</string>
 
 </resources>
