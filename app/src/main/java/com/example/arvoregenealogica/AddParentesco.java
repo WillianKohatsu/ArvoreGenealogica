@@ -77,6 +77,7 @@ public class AddParentesco extends AppCompatActivity {
         ArrayList<String> dados = new ArrayList<String>();
         for (Pessoa pessoa:
                 parentes) {
+            if(pessoa.getId()!=id)
             dados.add(pessoa.getNome());
         }
         return dados;}
