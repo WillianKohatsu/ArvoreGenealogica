@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,14 @@ public class ListaParente extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 idSelecionado = parentes.get(i).getId();
-                confirmaExcluir();
+                if(idSelecionado != 1) {
+                    confirmaExcluir();
+                }
+                else{
+                    Snackbar snackbar = Snackbar.make(view, "Não é possível apagar o próprio usuário", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
+
                 return true;
             }
         });

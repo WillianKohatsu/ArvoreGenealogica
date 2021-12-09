@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
+import com.example.arvoregenealogica.db.Pessoa;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
@@ -46,9 +47,17 @@ public class Perfil extends AppCompatActivity {
         btnAddParentesco.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Perfil.this, AddParentesco.class);
-                intent.putExtra("id",id);
-                startActivity(intent);
+                Pessoa pessoa = db.getPessoa(id);
+                pessoa.popularParentescos(db.getAllParentescosByIdPessoa(id));
+                if(pessoa.getPai() == null || pessoa.getMae() == null || pessoa.getConjuge() == null) {
+                    Intent intent = new Intent(Perfil.this, AddParentesco.class);
+                    intent.putExtra("id", id);
+                    startActivity(intent);
+                }
+                else{
+                    Snackbar snackbar = Snackbar.make(view, "Todos os parentescos da pessoa estão preenchidos", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
             }
         });
     }

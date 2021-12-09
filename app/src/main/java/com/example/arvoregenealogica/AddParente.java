@@ -73,6 +73,7 @@ public class AddParente extends AppCompatActivity {
                 Snackbar snackbar = Snackbar.make(view, mensagem[0], Snackbar.LENGTH_SHORT);
                 snackbar.show();
             }else{
+                btnAdicionar.setEnabled(false);
                 cadastrarParente(view);
             }
         });

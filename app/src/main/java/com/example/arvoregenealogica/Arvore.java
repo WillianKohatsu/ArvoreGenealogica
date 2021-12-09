@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
+import com.example.arvoregenealogica.db.Pessoa;
 import com.example.arvoregenealogica.ui.FamilyTreeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -18,6 +19,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Arvore extends AppCompatActivity {
@@ -95,5 +98,9 @@ public class Arvore extends AppCompatActivity {
         btnArvore = findViewById(R.id.btnArvore);
         btnListar = findViewById(R.id.btnListar);
         btnAdd = findViewById(R.id.btnAdicionar);
+        List<Pessoa> pessoas = helper.getAllPessoas();
+        if(pessoas.isEmpty())
+            helper.recreate();
+
     }
 }

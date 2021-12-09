@@ -2,6 +2,7 @@ package com.example.arvoregenealogica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
+import com.example.arvoregenealogica.utils.ToastMaster;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +25,11 @@ public class AddParentesco extends AppCompatActivity {
     private String tipoPar;
     private DatabaseHelper db = new DatabaseHelper(this);
     public Integer id, idPar;
-    String[] parentesco = {"Pai", "Mãe", "Conjuge"};
-    private List<Pessoa> parentes = new ArrayList<>();
+    private ArrayList<String> parentesco = new ArrayList<>();//{"Pai", "Mãe", "Conjuge"};
+    private ArrayList<Pessoa> parentes = new ArrayList<>();
+    private List<Pessoa> parentes2 = new ArrayList<>();
     public ArrayList<String> nomesParentes = new ArrayList<>();
+    private Pessoa pessoa = new Pessoa();
 
     AutoCompleteTextView autoCompleteTextView, autoCompleteTextView2;
     ArrayAdapter<String> adapterItem, adapterName;
@@ -68,7 +73,22 @@ public class AddParentesco extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addParentesco(tipoPar);
+                if(idPar != null && tipoPar != null){
+                    addParentesco(tipoPar);
+                    buttonAdd.setEnabled(false);
+                    Snackbar snackbar = Snackbar.make(view, "Parentesco criado com sucesso", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    },3000);
+                }
+                else{
+                    Snackbar snackbar = Snackbar.make(view, "É necessário preencher os campos", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
             }
         });
     }
@@ -96,9 +116,9 @@ public class AddParentesco extends AppCompatActivity {
 
     private void addParentesco(String tipo){
         switch (tipo){
-            case "pai" : db.insertParentescoPai(id, idPar); finish(); break;
-            case "mae" : db.insertParentescoMae(id, idPar); finish();break;
-            case "conjuge" : db.insertParentescoConjuge(id, idPar);finish(); break;
+            case "pai" : db.insertParentescoPai(id, idPar); break;
+            case "mae" : db.insertParentescoMae(id, idPar);break;
+            case "conjuge" : db.insertParentescoConjuge(id, idPar); break;
         }
     }
 
@@ -107,8 +127,31 @@ public class AddParentesco extends AppCompatActivity {
         buttonAdd = findViewById(R.id.btnAddPar);
         autoCompleteTextView2 = findViewById(R.id.auto2);
         autoCompleteTextView = findViewById(R.id.auto);
-        parentes = db.getAllPessoas();
-        nomesParentes = preencherDados(parentes);
+        parentes2 = db.getAllPessoas();
         String test = "";
+        pessoa = db.getPessoa(id);
+        pessoa.popularParentescos(db.getAllParentescosByIdPessoa(id));
+        if(pessoa.getPai() == null) parentesco.add("Pai");
+        if(pessoa.getMae() == null) parentesco.add("Mãe");
+        if(pessoa.getConjuge() == null) parentesco.add("Conjuge");
+        try {
+            for (Pessoa p :
+                    parentes2) {
+                int idPai = (pessoa.getPai() == null?0:pessoa.getPai().getIdParente()),
+                        idMae = (pessoa.getMae()==null?0:pessoa.getMae().getIdParente()),
+                        idConjuge = (pessoa.getConjuge()==null?0:pessoa.getConjuge().getIdParente()),
+                        idPessoa = p.getId();
+
+
+                if (idPessoa != idPai &&
+                    idPessoa != idMae &&
+                    idPessoa!= idConjuge)
+                        parentes.add(p);
+            }
+        }
+        catch(Exception e){
+            String msg = e.getMessage();
+        }
+        nomesParentes = preencherDados(parentes);
     }
 }
