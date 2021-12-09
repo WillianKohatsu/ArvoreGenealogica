@@ -103,8 +103,8 @@ public class FormCadastroActivity extends AppCompatActivity {
         usuarios.put("nome", nome);
 
         //cadastro sqplite
-        dbh = new DatabaseHelper(this);
-        dbh.insertPessoa(nome, titulo, imagem, gen, dtNasc);
+        //dbh = new DatabaseHelper(this);
+        //dbh.insertPessoa(nome, titulo, imagem, gen, dtNasc);
 
         usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

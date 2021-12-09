@@ -72,7 +72,7 @@
         android:textColor="@color/white"
         app:boxStrokeColor="@color/orange"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@id/btnCadastrar"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email">
