@@ -100,6 +100,7 @@ public class Editar extends AppCompatActivity {
     private void alterarDados(View v){
         pessoa = new Pessoa(id, nome, titulo, "", gen, dtNasc);
         db.updatePessoa(pessoa);
+        btnAdicionar.setEnabled(false);
         Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
         snackbar.show();
         new Handler().postDelayed(new Runnable() {

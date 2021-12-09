@@ -87,6 +87,9 @@ public class Arvore extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 nomeUsuario.setText(documentSnapshot.getString("nome"));
                 emailUsuario.setText(email);
+                List<Pessoa> pessoas = helper.getAllPessoas();
+                if(pessoas.isEmpty())
+                    helper.insertPessoa(nomeUsuario.getText().toString(), "Eu", "", "", "");
             }
         });
     }
