@@ -86,20 +86,21 @@ public class AddParente extends AppCompatActivity {
 
     private void cadastrarParente(View v){
         db = new DatabaseHelper(this);
-        db.insertPessoa(nome, titulo, imagem, gen, dtNasc);
+        int idPessoa = (int) db.insertPessoa(nome, titulo, imagem, gen, dtNasc);
         Snackbar snackbar = Snackbar.make(v, mensagem[1], Snackbar.LENGTH_SHORT);
         snackbar.show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                telaArvore();
+                telaPerfil(idPessoa);
             }
         },3000);
 
     }
 
-    private void telaArvore(){
-        Intent intent = new Intent(AddParente.this, Arvore.class);
+    private void telaPerfil(int idPessoa){
+        Intent intent = new Intent(this, Perfil.class);
+        intent.putExtra("id",idPessoa);
         startActivity(intent);
         finish();
     }

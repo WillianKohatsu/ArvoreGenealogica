@@ -3,11 +3,15 @@ package com.example.arvoregenealogica.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.example.arvoregenealogica.AddParente;
+import com.example.arvoregenealogica.Arvore;
 import com.example.arvoregenealogica.Perfil;
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.interfaces.OnFamilySelectListener;
@@ -19,6 +23,8 @@ import com.example.arvoregenealogica.utils.ConvertPessoa;
 import com.example.arvoregenealogica.utils.ToastMaster;
 import com.example.arvoregenealogica.R;
 import com.example.arvoregenealogica.db.FamilyLiteOrm;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -34,8 +40,10 @@ public class FamilyTreeActivity extends BaseActivity {
 
     private Button btnEnlarge;
     private Button btnShrinkDown;
+    private FloatingActionButton fabAddParente, fabAtualizarArvore;
     private FamilyTreeView ftvTree;
-    private FamilyTreeView2 ftvTree2;
+    ScaleGestureDetector scaleGestureDetector;
+    //private FamilyTreeView2 ftvTree2;
 
     private FamilyLiteOrm mDatabase;
 
@@ -57,6 +65,24 @@ public class FamilyTreeActivity extends BaseActivity {
         setPermissions();
          */
         initView();
+
+        fabAddParente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FamilyTreeActivity.this, AddParente.class);
+                startActivity(intent);
+            }
+        });
+
+        fabAtualizarArvore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar snackbar = Snackbar.make(view, "Árvore atualizada", Snackbar.LENGTH_SHORT);
+                snackbar.show();
+                setData();
+            }
+        });
+
         setData();
     }
 
@@ -74,10 +100,12 @@ public class FamilyTreeActivity extends BaseActivity {
     }
 
     private void initView() {
-        btnEnlarge = (Button) findViewById(R.id.btn_enlarge);
-        btnShrinkDown = (Button) findViewById(R.id.btn_shrink_down);
+        //btnEnlarge = (Button) findViewById(R.id.btn_enlarge);
+        //btnShrinkDown = (Button) findViewById(R.id.btn_shrink_down);
+        fabAddParente = (FloatingActionButton) findViewById(R.id.fabAddParente);
+        fabAtualizarArvore = (FloatingActionButton) findViewById(R.id.fabAtualizarArvore);
         ftvTree = (FamilyTreeView) findViewById(R.id.ftv_tree);
-        ftvTree2 = (FamilyTreeView2) findViewById(R.id.ftv_tree2);
+        //ftvTree2 = (FamilyTreeView2) findViewById(R.id.ftv_tree2);
     }
 
     private void setData() {
@@ -85,12 +113,12 @@ public class FamilyTreeActivity extends BaseActivity {
             haveFosterParent = getIntent().getBooleanExtra(HAVE_FOSTER_PARENT, false);
             if (haveFosterParent) {
                 ftvTree.setVisibility(View.GONE);
-                ftvTree2.setVisibility(View.VISIBLE);
+                //ftvTree2.setVisibility(View.VISIBLE);
                 btnEnlarge.setVisibility(View.GONE);
                 btnShrinkDown.setVisibility(View.GONE);
             } else {
                 ftvTree.setVisibility(View.VISIBLE);
-                ftvTree2.setVisibility(View.GONE);
+                //ftvTree2.setVisibility(View.GONE);
             }
 
             mDatabase = new FamilyLiteOrm(this);
@@ -106,22 +134,22 @@ public class FamilyTreeActivity extends BaseActivity {
             mDatabase.deleteTable();
             mDatabase.save(mList);
 
-            btnEnlarge.setOnClickListener(click);
-            btnShrinkDown.setOnClickListener(click);
+            //btnEnlarge.setOnClickListener(click);
+            //btnShrinkDown.setOnClickListener(click);
 
 
             FamilyMember mFamilyMember = mDatabase.getFamilyTreeById(MY_ID);
 
             if (mFamilyMember != null) {
                 if (haveFosterParent) {
-                    ftvTree2.setFamilyMember(mFamilyMember);
+                    //ftvTree2.setFamilyMember(mFamilyMember);
                 } else {
                     ftvTree.setFamilyMember(mFamilyMember);
                 }
             }
 
             ftvTree.setOnFamilySelectListener(familySelect);
-            ftvTree2.setOnFamilySelectListener(familySelect);
+            //ftvTree2.setOnFamilySelectListener(familySelect);
         }
         catch (Exception ex){
             String msg = ex.getMessage();
@@ -140,7 +168,7 @@ public class FamilyTreeActivity extends BaseActivity {
                 FamilyMember currentFamily = mDatabase.getFamilyTreeById(currentFamilyId);
                 if (currentFamily != null) {
                     if (haveFosterParent) {
-                        ftvTree2.setFamilyMember(currentFamily);
+                        //ftvTree2.setFamilyMember(currentFamily);
                     } else {
                         ftvTree.setFamilyMember(currentFamily);
                     }
@@ -149,7 +177,7 @@ public class FamilyTreeActivity extends BaseActivity {
         }
     };
 
-    private View.OnClickListener click = new View.OnClickListener() {
+    /*private View.OnClickListener click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (!haveFosterParent) {
@@ -163,7 +191,7 @@ public class FamilyTreeActivity extends BaseActivity {
                 }
             }
         }
-    };
+    };*/
 
     public void abrirTelaPerfil(String id){
         Intent intent = new Intent(this, Perfil.class);
