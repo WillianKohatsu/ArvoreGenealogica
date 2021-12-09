@@ -21,55 +21,107 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         />
 
-    <View
-        android:id="@+id/containerComponents"
-        style="@style/ContainerComponents"
-        android:layout_height="310dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/nome"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:text="Nome:"/>
 
     <TextView
         android:id="@+id/perfilNome"
-        style="@style/Edit_Text"
-        android:textColor="@color/green_dark"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toTopOf="@id/containerComponents"/>
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/nome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/nome"
+        tools:text="Fabio"/>
 
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfilNome"
+        android:text="Parentesco:"/>
     <TextView
         android:id="@+id/perfilTitulo"
-        style="@style/Edit_Text"
-        android:textColor="@color/green_dark"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilNome"/>
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/titulo"
+        tools:text="Irmão"/>
 
+
+    <TextView
+        android:id="@+id/genero"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfilTitulo"
+        android:text="Gênero:"/>
     <TextView
         android:id="@+id/perfilGenero"
-        style="@style/Edit_Text"
-        android:textColor="@color/green_dark"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilTitulo"/>
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/genero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/genero"
+        tools:text="Masculino"/>
+
+
 
     <TextView
+        android:id="@+id/dtNasc"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="@color/orange"
+        android:textSize="24sp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfilGenero"
+        android:text="Nascimento:"/>
+    <TextView
         android:id="@+id/perfilDtNasc"
-        style="@style/Edit_Text"
-        android:textColor="@color/green_dark"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@id/containerComponents"
-        app:layout_constraintTop_toBottomOf="@id/perfilGenero"/>
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/dtNasc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/dtNasc"
+        tools:text="29/11/1989"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnEdit"
         style="@style/Button"
         android:text="@string/bt_alterar"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/containerComponents"/>
+        app:layout_constraintTop_toBottomOf="@id/perfilDtNasc"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddParent"

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.arvoregenealogica.db.DatabaseHelper;
 import com.example.arvoregenealogica.db.Pessoa;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class Perfil extends AppCompatActivity {
 
     private Button btnEdit, btnAddParentesco;
+    private MaterialToolbar toolbar;
     private TextView perfilNome, perfilTitulo, perfilGenero, perfilDtNasc;
     private DatabaseHelper db = new DatabaseHelper(this);
     public Integer id;
@@ -59,6 +61,10 @@ public class Perfil extends AppCompatActivity {
                     snackbar.show();
                 }
             }
+        });
+
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
         });
     }
 
@@ -105,6 +111,7 @@ public class Perfil extends AppCompatActivity {
         perfilGenero = findViewById(R.id.perfilGenero);
         perfilDtNasc = findViewById(R.id.perfilDtNasc);
         btnEdit = findViewById(R.id.btnEdit);
-        btnAddParentesco = findViewById(R.id.btnAddParent);;
+        btnAddParentesco = findViewById(R.id.btnAddParent);
+        toolbar = findViewById(R.id.toolbar);
     }
 }
