@@ -145,7 +145,8 @@ public class AddParentesco extends AppCompatActivity {
 
                 if (idPessoa != idPai &&
                     idPessoa != idMae &&
-                    idPessoa!= idConjuge)
+                    idPessoa != idConjuge &&
+                    idPessoa != pessoa.getId())
                         parentes.add(p);
             }
         }
