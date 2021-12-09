@@ -46,8 +46,7 @@ public class FamilyTreeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_tree);
 
-        initView();
-
+        /*
         String appName = getString(R.string.app_name);
         permissions = new String[]{
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -56,6 +55,9 @@ public class FamilyTreeActivity extends BaseActivity {
                 String.format("Abra a permissão de armazenamento em Configurações-Aplicativo", appName),
         };
         setPermissions();
+         */
+        initView();
+        setData();
     }
 
     @Override
